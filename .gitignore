@@ -1,0 +1,35 @@
+# Top-level ignores for the Onestop monorepo.
+# Per-project ignores live in lifehub/.gitignore and samsung-sync/.gitignore.
+
+# SDK / toolchain downloads kept locally for offline builds. Never commit.
+tools/*.zip
+tools/android-sdk/
+tools/gradle/
+tools/jdk/
+
+# Drop shipped APKs and real Samsung Health exports (PII).
+*.apk
+samsunghealth_*/
+
+# Generated ingest token (kept locally; recreated via `make ingest-token`).
+lifehub/.ingest_token
+
+# Android build outputs (also in samsung-sync/.gitignore, listed here
+# in case the user runs git from the monorepo root).
+samsung-sync/app/build/
+samsung-sync/build/
+samsung-sync/.gradle/
+samsung-sync/local.properties
+samsung-sync/app/release/
+samsung-sync/app/debug/
+samsung-sync/.idea/
+samsung-sync/*.iml
+samsung-sync/app/*.iml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

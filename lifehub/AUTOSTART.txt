@@ -1,0 +1,49 @@
+OneLife - Startup Guide
+========================
+
+This app can be configured to start automatically when you log in to Windows
+and open in Google Chrome.
+
+How it works
+------------
+1. A shortcut has been placed in your Windows Startup folder
+   (%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\OneLife.lnk)
+2. At logon, Windows runs that shortcut, which:
+   - Launches start_silent.vbs (no visible console window)
+   - That runs start.bat in the background
+   - start.bat checks if the server is already running
+   - If not, it starts the Flask server (hidden) and waits for port 5000
+   - Once the server is up, it opens Chrome (app mode) to localhost:5000
+
+If Chrome isn't installed, it falls back to your default browser.
+
+To enable or disable auto-start
+-------------------------------
+Double-click manage_startup.bat and pick an option:
+  1. Enable auto-start
+  2. Disable auto-start
+  3. Open Startup folder (see the shortcut manually)
+  4. Test launch now (runs the same flow as logon)
+
+You can also run it from a command prompt:
+  manage_startup.bat --enable
+  manage_startup.bat --disable
+
+To launch manually at any time
+-------------------------------
+Just run start.bat. It will:
+  - Start the server if not already running
+  - Open Chrome (or your default browser) to http://localhost:5000
+
+Stopping the server
+-------------------
+To stop the server, right-click the OneLife icon in the system tray
+(if you used pythonw) or open Task Manager and end the "python" or
+"pythonw" process. Or close the console window if you launched with start.bat.
+
+Files added
+-----------
+  start.bat              - Main launcher (server + Chrome)
+  start_silent.vbs       - Hidden launcher used by the Startup shortcut
+  manage_startup.bat     - Interactive tool to enable/disable auto-start
+  AUTOSTART.txt          - This file

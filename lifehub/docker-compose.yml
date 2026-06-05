@@ -1,0 +1,21 @@
+services:
+  onelife:
+    build: .
+    image: onelife:latest
+    container_name: onelife
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: production
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      DATABASE_URL: sqlite:////app/instance/onelife.db
+    volumes:
+      - ./instance:/app/instance
+      - ./uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:5000/api/dashboard/summary"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s

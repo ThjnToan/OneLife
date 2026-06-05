@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ OneLife ✦ Neon Kawaii Arcade</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/icon.svg') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
+    <meta name="theme-color" content="#1a0b3d">
+    <meta name="description" content="OneLife — your neon kawaii arcade for tasks, health, journal, goals, finance and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+    <div id="statusAnnouncer" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="OneLife" width="220" height="54" style="width:220px;height:auto;max-width:100%">
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-section-label">Overview</li>
+                <li><a href="#dashboard" class="nav-link active" data-section="dashboard">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    </span>
+                    Dashboard
+                </a></li>
+
+                <li class="nav-section-label">Life</li>
+                <li><a href="#tasks" class="nav-link" data-section="tasks">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                    </span>
+                    Tasks
+                </a></li>
+                <li><a href="#health" class="nav-link" data-section="health">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </span>
+                    Health
+                </a></li>
+                <li><a href="#journal" class="nav-link" data-section="journal">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </span>
+                    Journal
+                </a></li>
+                <li><a href="#goals" class="nav-link" data-section="goals">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </span>
+                    Goals
+                </a></li>
+
+                <li class="nav-section-label">Work</li>
+                <li><a href="#finance" class="nav-link" data-section="finance">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    </span>
+                    Finance
+                </a></li>
+                <li><a href="#learning" class="nav-link" data-section="learning">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                    </span>
+                    Learning
+                </a></li>
+                <li><a href="#calendar" class="nav-link" data-section="calendar">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </span>
+                    Calendar
+                </a></li>
+                <li><a href="#documents" class="nav-link" data-section="documents">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+                    </span>
+                    Drive
+                </a></li>
+
+                <li class="nav-section-label">People</li>
+                <li><a href="#contacts" class="nav-link" data-section="contacts">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </span>
+                    Contacts
+                </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#settings" class="nav-link" data-section="settings">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    </span>
+                    Settings
+                </a>
+                <a href="#" class="nav-link" onclick="showDataManagement()">
+                    <span class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+                    </span>
+                    Backup &amp; Restore
+                </a>
+                <div class="user-identity">
+                    <div class="user-avatar">O</div>
+                    <div class="user-info">
+                        <div class="user-name">You</div>
+                        <div class="user-status">OneLife workspace</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Backdrop -->
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+        
+        <!-- Mobile Toggle -->
+        <button class="mobile-toggle" id="mobileToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <header class="page-header">
+                <div class="page-header-titles">
+                    <div class="page-breadcrumb">OneLife &nbsp;/&nbsp; <span id="pageBreadcrumb">Dashboard</span></div>
+                    <h1 id="pageTitle" class="page-title-large">Dashboard</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="customizeWidgetsBtn" title="Customize dashboard widgets" style="display:none">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    </button>
+                    <span id="currentDate"></span>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                    </button>
+                </div>
+            </header>
+            
+            <div id="contentArea" class="content-area">
+                <!-- Dynamic content loads here -->
+            </div>
+        </main>
+
+        <!-- Right Panel -->
+        <aside class="right-panel" id="rightPanel">
+            <button class="right-panel-toggle" id="rightPanelToggle" title="Toggle right panel">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="right-panel-content">
+                <div class="quick-capture">
+                    <div class="quick-capture-tabs">
+                        <button class="qc-tab active" data-qc-tab="task">Task</button>
+                        <button class="qc-tab" data-qc-tab="note">Note</button>
+                        <button class="qc-tab" data-qc-tab="expense">Expense</button>
+                    </div>
+                    <label for="qcInput" class="sr-only">Quick capture content</label>
+                    <textarea class="qc-input" id="qcInput" rows="1" placeholder="Capture a task… (press Enter)" aria-label="Quick capture input"></textarea>
+                    <div class="qc-hint">⏎ to save · Shift+⏎ for new line</div>
+                </div>
+                <div class="rp-widget" id="rpAgenda">
+                    <div class="rp-widget-header">
+                        <span class="rp-widget-title">Today</span>
+                        <span class="rp-widget-meta" id="rpAgendaCount">0 events</span>
+                    </div>
+                    <div class="rp-widget-body" id="rpAgendaBody">
+                        <div class="rp-empty">Nothing scheduled</div>
+                    </div>
+                </div>
+                <div class="rp-widget" id="rpCalendar">
+                    <div class="rp-widget-header">
+                        <button class="rp-cal-nav" id="rpCalPrev">‹</button>
+                        <span class="rp-widget-title" id="rpCalMonth">June 2026</span>
+                        <button class="rp-cal-nav" id="rpCalNext">›</button>
+                    </div>
+                    <div class="rp-cal-grid" id="rpCalGrid"></div>
+                </div>
+                <div class="rp-widget" id="rpSticky">
+                    <div class="rp-widget-header">
+                        <span class="rp-widget-title">Sticky note</span>
+                        <button class="rp-icon-btn" id="rpStickyClear" title="Clear">×</button>
+                    </div>
+                    <label for="rpStickyText" class="sr-only">Sticky note content</label>
+                    <textarea class="rp-sticky" id="rpStickyText" placeholder="Jot anything down…" aria-label="Sticky note content"></textarea>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Title</h2>
+                <button class="modal-close" id="modalClose" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Command Palette -->
+    <div class="cmd-palette-overlay spotlight" id="cmdPaletteOverlay">
+        <div class="cmd-palette spotlight">
+            <div class="cmd-palette-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" class="cmd-palette-input" id="cmdPaletteInput" placeholder="Search tasks, contacts, journal, goals..." autocomplete="off" spellcheck="false">
+                <kbd>ESC</kbd>
+            </div>
+            <div class="cmd-palette-results" id="cmdPaletteResults">
+                <div class="cmd-palette-empty">Start typing to search...</div>
+            </div>
+            <div class="cmd-palette-footer">
+                <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+                <span><kbd>⏎</kbd> open</span>
+                <span><kbd>ESC</kbd> close</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick shortcut hint -->
+    <div class="shortcuts-hint" id="shortcutsHint">Ctrl+K to search</div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"/>
+            <polyline points="5 12 12 5 19 12"/>
+        </svg>
+    </button>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=1.0.1"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/sw.js').catch(() => {});
+            });
+        }
+
+        /* ✦ A few slow drifting sakura petals (anime ambience) */
+        (function spawnPetals() {
+            const host = document.getElementById('petals');
+            if (!host) return;
+            const colors = ['#ff7ad9', '#ffb3e6', '#a06bff'];
+            for (let i = 0; i < 6; i++) {
+                const el = document.createElement('span');
+                el.className = 'petal';
+                const c = colors[i % colors.length];
+                el.style.background = `radial-gradient(circle at 30% 30%, #ffd1e8, ${c} 60%, ${c})`;
+                el.style.left = (Math.random() * 100) + 'vw';
+                el.style.top = '-20px';
+                el.style.animationDuration = (22 + Math.random() * 12) + 's';
+                el.style.animationDelay = (-Math.random() * 30) + 's';
+                el.style.opacity = (0.35 + Math.random() * 0.25).toString();
+                el.style.transform = `scale(${0.7 + Math.random() * 0.5})`;
+                host.appendChild(el);
+            }
+        })();
+
+        /* ✦ Recolor any leftover Google brand hex codes injected by app.js
+              so the livery stays cohesive. Maps: blue→neon-cyan, red→neon-pink,
+              green→neon-mint, yellow→neon-yellow, purple→neon-purple. */
+        (function recolorInlineBranding() {
+            const map = {
+                '#4285F4': 'var(--neon-cyan)',
+                '#34A853': 'var(--neon-mint)',
+                '#FBBC05': 'var(--neon-yellow)',
+                '#EA4335': 'var(--neon-pink)',
+                '#A142F4': 'var(--neon-purple)',
+                '#10b981': 'var(--neon-mint)',
+                '#3b82f6': 'var(--neon-cyan)',
+                '#FA7B17': 'var(--neon-orange)'
+            };
+            const walk = (root) => {
+                const all = root.querySelectorAll('*');
+                all.forEach(el => {
+                    const s = el.getAttribute('style');
+                    if (!s) return;
+                    let changed = false;
+                    let out = s;
+                    Object.keys(map).forEach(hex => {
+                        const re = new RegExp(hex.replace('#', '#'), 'gi');
+                        if (re.test(out)) { out = out.replace(re, map[hex]); changed = true; }
+                    });
+                    if (changed) el.setAttribute('style', out);
+                });
+            };
+            const observer = new MutationObserver(muts => muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) walk(n); })));
+            observer.observe(document.body, { childList: true, subtree: true });
+            walk(document);
+            // Periodic sweep for late inserts (charts, kanban re-renders)
+            setInterval(() => walk(document), 1500);
+        })();
+    </script>
+</body>
+</html>

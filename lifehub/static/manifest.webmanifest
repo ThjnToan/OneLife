@@ -1,0 +1,19 @@
+{
+  "name": "✦ OneLife — Neon Kawaii Arcade",
+  "short_name": "OneLife",
+  "description": "Your neon kawaii arcade for tasks, health, journal, goals, finance and more.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0628",
+  "theme_color": "#1a0b3d",
+  "icons": [
+    {
+      "src": "/static/img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+==================================================
+ OneLife Sync — Quick install (Samsung phone)
+==================================================
+
+Your APK is built. To install it, you need to do two things on
+this PC, then install on the phone.
+
+----- ON THIS PC (one-time, ~30 seconds) -----
+
+1. Open PowerShell AS ADMINISTRATOR:
+   - Press the Windows key, type "PowerShell"
+   - Right-click "Windows PowerShell"
+   - Click "Run as administrator"
+   - Click "Yes" on the UAC prompt
+
+2. Paste this command and press Enter:
+
+   New-NetFirewallRule -DisplayName 'OneLife 5000' -Direction Inbound -Protocol TCP -LocalPort 5000 -Action Allow -Profile Private
+
+3. Close that admin PowerShell window.
+
+----- ON YOUR PHONE -----
+
+4. Connect the phone to the same Wi-Fi as this PC.
+
+5. **Disable NordVPN on the phone** (Settings > Connections > More connection settings > VPN, or open the NordVPN app and tap Disconnect). NordVPN blocks LAN access from the phone.
+
+6. Open Chrome (or any browser) on the phone.
+
+7. Go to:
+
+   http://10.212.16.44:5000/static/OneLifeSync.apk
+
+8. The phone will download `OneLifeSync.apk` (~7.6 MB).
+
+9. When the download finishes, tap it. Android will ask to
+   "Allow this source" — enable it for the browser you're using
+   (Chrome). Then tap Install.
+
+10. Open the new "OneLife Sync" app from the app drawer.
+
+----- IN THE APP -----
+
+11. **OneLife URL** field, type:
+
+    http://10.212.16.44:5000
+
+12. **Bearer token** field, type:
+
+    erqgNFvCS3Jin8dGXrZnqNP3E4wnE684CF8LbnQx0kU
+
+13. Tap **Save**. Status should say *"Saved. Tap 'Open Health Connect' next."*
+
+14. Tap **Open Health Connect**. Health Connect opens.
+
+    In Health Connect, navigate to OneLife Sync's permission page.
+    The path is usually one of these (try in order):
+
+    - **Data sources** tab (bottom) → **Apps and devices** → **OneLife Sync** → toggle all 9 categories on
+    - **Menu** (☰) → **Apps and devices** → **OneLife Sync** → toggle all 9 categories on
+    - **Profile** icon → **Apps and devices** → **OneLife Sync** → toggle all 9 categories on
+
+    If none of those work on your phone's Health Connect build, use
+    the second button in the app instead:
+
+15. **OR** tap **Open Android app settings** in the OneLife Sync app.
+    This opens Settings → Apps → OneLife Sync → Permissions.
+    Toggle on all the Health Connect categories shown there.
+
+16. **Return to the OneLife Sync app.** When the app comes back
+    to the foreground, it auto-checks permissions. The status
+    text should now say *"Permissions granted."*
+
+17. If it still says permissions are missing, look in Health
+    Connect's settings for a section called "Data sources and
+    access" or "Apps and devices" — OneLife Sync should be in
+    that list. Toggle everything on.
+
+18. Tap **Test connection**. Status should change to
+    "Connection OK..." or similar.
+
+16. Tap **Sync now**. The app will pull the last 24 h from Health
+    Connect and post to your OneLife server. Open the OneLife
+    dashboard on this PC — you should see new steps, heart rate,
+    and sleep data.
+
+17. Turn on **Background sync (every 15 min)** for ongoing sync.
+
+----- ON YOUR PC DASHBOARD -----
+
+Open http://127.0.0.1:5000 (or http://10.212.16.44:5000 from
+the phone's browser) and check the Health page. You should see
+data flowing in.
+
+----- TROUBLESHOOTING -----
+
+- "Connection refused" or "This site can't be reached":
+    - Firewall rule didn't apply. Re-run step 2.
+    - Phone not on same Wi-Fi.
+    - Phone has NordVPN or another VPN on — disable it.
+
+- "401 Invalid token" in app status:
+    - Re-copy the token from step 12 — no extra spaces.
+
+- "503 Ingest endpoint disabled" on server logs:
+    - Server wasn't restarted with the token. Stop PID 31548 and
+      rerun launch_onelife.py.
+
+- Phone says "App not installed" / "Package appears to be invalid":
+    - Re-download the APK. The browser may have partially
+      downloaded.
+
+- Forgot to grant a Health Connect permission:
+    - Phone Settings > Apps > Health Connect > Apps and devices
+      > OneLife Sync > toggle on what's missing.
+
+==================================================
+Server:  http://10.212.16.44:5000  (PID 31548)
+APK:     C:\Users\Laptop K1\Downloads\Onestop\OneLifeSync.apk
+Token:   erqgNFvCS3Jin8dGXrZnqNP3E4wnE684CF8LbnQx0kU
+==================================================
