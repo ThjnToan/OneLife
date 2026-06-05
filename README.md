@@ -435,5 +435,5 @@ sample twice by accident, fix the test — don't disable the constraint.
 
 ## License
 
-TBD — pick a license that matches your intent. MIT and AGPL-3.0 are the
-two common choices for self-hosted apps.
+[MIT](LICENSE) — Copyright © 2026 Thien Toan. Do whatever you want, just
+keep the copyright notice.
