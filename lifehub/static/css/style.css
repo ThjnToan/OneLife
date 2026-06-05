@@ -1286,6 +1286,106 @@ input[type="range"]{width:100%;accent-color:var(--neon-pink);padding:0;border:no
 }
 
 /* ============================================================
+   Filter toolbars (Tasks / Goals / Learning / etc.)
+   ------------------------------------------------------------
+   The bar that holds filter chips, sort chips, view toggle, and
+   the section search input. The markup looks like:
+
+     <div class="filters">
+       <div class="pill-group" id="taskFilterPills">…</div>
+       <div class="pill-group" id="taskSortPills">…</div>
+       <div class="view-toggle-pills">…</div>
+       <div class="section-search-container">…<input …></div>
+     </div>
+
+   The row wraps cleanly, never overflows, and stays usable
+   down to ~360px viewports.
+   ============================================================ */
+.filters{
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+    margin-bottom:18px;
+}
+.filters > *{min-width:0;flex-shrink:0}
+
+/* ── Pill groups (segmented cluster of filter chips) ── */
+.pill-group{
+    display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;
+    background:var(--c-surface2);
+    border:1px solid var(--c-border);
+    border-radius:var(--r-pill);
+    padding:4px;
+    box-shadow:var(--sh-xs);
+}
+.pill{
+    appearance:none;-webkit-appearance:none;
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:6px 14px;
+    border:1px solid transparent;
+    border-radius:var(--r-pill);
+    background:transparent;
+    color:var(--c-text2);
+    font:600 .8125rem/1 var(--font);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background var(--tr),color var(--tr),
+               border-color var(--tr),box-shadow var(--tr),transform var(--tr);
+}
+.pill:hover:not(.active){
+    background:var(--c-surface-hi);
+    color:var(--c-text);
+}
+.pill.active{
+    background:linear-gradient(135deg, var(--neon-pink), var(--neon-pink-d));
+    color:#fff;
+    border-color:rgba(255,255,255,0.18);
+    box-shadow:var(--sh-neon-pink);
+    text-shadow:0 0 6px rgba(255,255,255,0.35);
+}
+.pill:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 2px var(--c-bg),0 0 0 4px var(--neon-cyan);
+}
+
+/* ── Section search input (the per-section "Filter …" box) ── */
+.section-search-container{
+    position:relative;
+    display:inline-flex;align-items:center;
+    min-width:0;flex:1 1 180px;
+    max-width:280px;
+}
+.section-search-container > svg{
+    position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    color:var(--c-text3);pointer-events:none;
+}
+.section-search-input{
+    width:100%;min-width:0;
+    height:34px;
+    padding:0 14px 0 34px;
+    background:var(--c-surface);
+    border:1px solid var(--c-border);
+    border-radius:var(--r-pill);
+    color:var(--c-text);
+    font:.8125rem var(--font);
+    transition:border-color var(--tr),box-shadow var(--tr),background var(--tr);
+}
+.section-search-input::placeholder{color:var(--c-text3)}
+.section-search-input:hover{border-color:rgba(160,107,255,0.5)}
+.section-search-input:focus{
+    outline:none;border-color:var(--neon-pink);
+    box-shadow:0 0 0 3px rgba(255,62,165,0.2);
+    background:var(--c-surface2);
+}
+
+/* ── Mobile: drop the auto-margin on the search input so the
+      right edge never gets clipped, and let it stretch full ── */
+@media (max-width: 640px){
+    .section-search-container{
+        max-width:none;flex-basis:100%;
+    }
+    .filters{gap:8px}
+}
+
+/* ============================================================
    Toast
    ============================================================ */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:1001;display:flex;flex-direction:column;gap:8px}
@@ -1453,9 +1553,11 @@ input[type="range"]{width:100%;accent-color:var(--neon-pink);padding:0;border:no
 }
 .kanban-card-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 .view-toggle-pills{
-    display:inline-flex;background:var(--c-surface2);
+    display:inline-flex;align-items:center;gap:4px;
+    background:var(--c-surface2);
     border:1px solid var(--c-border);border-radius:var(--r-pill);
-    padding:3px;gap:2px;margin-bottom:16px;
+    padding:4px;
+    box-shadow:var(--sh-xs);
 }
 
 /* Mood Heatmap */

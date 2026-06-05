@@ -1327,7 +1327,7 @@ function renderTasksList() {
             </button>
         </div>
 
-        <div class="filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <div class="filters">
             <div class="pill-group" id="taskFilterPills">
                 <button class="pill active" data-filter="all" onclick="setTaskFilter('all')">All</button>
                 <button class="pill" data-filter="pending" onclick="setTaskFilter('pending')">Pending</button>
@@ -1340,11 +1340,11 @@ function renderTasksList() {
                 <button class="pill" data-sort="due_date" onclick="setTaskSort('due_date')">Due</button>
                 <button class="pill" data-sort="status" onclick="setTaskSort('status')">Status</button>
             </div>
-            <div class="view-toggle-pills" id="taskViewPills" style="margin-bottom: 0;">
-                <button class="pill ${taskViewMode === 'list' ? 'active' : ''}" onclick="setTaskView('list')" style="padding: 6px 12px; font-size: 0.8125rem; font-weight: 500; border-radius: var(--r-full); background: transparent; border: none; cursor: pointer; color: var(--c-text2); transition: all var(--tr);">List</button>
-                <button class="pill ${taskViewMode === 'kanban' ? 'active' : ''}" onclick="setTaskView('kanban')" style="padding: 6px 12px; font-size: 0.8125rem; font-weight: 500; border-radius: var(--r-full); background: transparent; border: none; cursor: pointer; color: var(--c-text2); transition: all var(--tr);">Board</button>
+            <div class="view-toggle-pills" id="taskViewPills">
+                <button class="pill ${taskViewMode === 'list' ? 'active' : ''}" onclick="setTaskView('list')">List</button>
+                <button class="pill ${taskViewMode === 'kanban' ? 'active' : ''}" onclick="setTaskView('kanban')">Board</button>
             </div>
-            <div class="section-search-container" style="margin-bottom: 0; margin-left: auto;">
+            <div class="section-search-container">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 <input type="text" class="section-search-input" id="taskSearchInput" placeholder="Filter tasks..." oninput="filterTasksLive(this.value)" value="${escapeHtml(taskSearchQuery)}">
             </div>
@@ -3471,14 +3471,14 @@ async function renderLearning() {
                 </button>
             </div>
             
-            <div class="filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <div class="filters">
                 <div class="pill-group" id="learnFilterPills">
                     <button class="pill ${!learnFilter ? 'active' : ''}" onclick="filterLearning('')">All</button>
                     <button class="pill ${learnFilter === 'in_progress' ? 'active' : ''}" onclick="filterLearning('in_progress')">In Progress</button>
                     <button class="pill ${learnFilter === 'completed' ? 'active' : ''}" onclick="filterLearning('completed')">Completed</button>
                     <button class="pill ${learnFilter === 'not_started' ? 'active' : ''}" onclick="filterLearning('not_started')">Not Started</button>
                 </div>
-                <div class="section-search-container" style="margin-bottom: 0; margin-left: auto;">
+                <div class="section-search-container">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <input type="text" class="section-search-input" id="learnSearchInput" placeholder="Filter learning..." oninput="filterLearningLive(this.value)" value="${escapeHtml(learnSearchQuery)}">
                 </div>
@@ -3970,8 +3970,8 @@ async function renderContacts() {
                 </button>
             </div>
             
-            <div class="filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                <div class="section-search-container" style="margin-bottom: 0;">
+            <div class="filters">
+                <div class="section-search-container">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <input type="text" class="section-search-input" id="contactSearch" placeholder="Search contacts..." oninput="filterContacts()">
                 </div>
@@ -4283,8 +4283,8 @@ async function renderDrive() {
 
             ${breadcrumbs}
             
-            <div class="filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 12px; margin-bottom: 12px;">
-                <div class="section-search-container" style="margin-bottom: 0; width: 100%; max-width: 320px;">
+            <div class="filters">
+                <div class="section-search-container">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <input type="text" class="section-search-input" id="driveSearchInput" placeholder="Filter files & folders..." oninput="filterDriveLive(this.value)" value="${escapeHtml(driveSearchQuery)}">
                 </div>
@@ -4838,8 +4838,8 @@ async function renderJournal() {
                 </button>
             </div>
             
-            <div class="filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px;">
-                <div class="section-search-container" style="margin-bottom: 0;">
+            <div class="filters">
+                <div class="section-search-container">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <input type="text" class="section-search-input" id="journalSearchInput" placeholder="Filter journal..." oninput="filterJournalLive(this.value)" value="${escapeHtml(journalSearchQuery)}">
                 </div>
